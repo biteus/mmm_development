@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedicalManager.Data
 {
-    public class MedicalManagerDBContext : IdentityDbContext
+    public class MedicalManagerDBContext : IdentityDbContext<User>
     {
         public MedicalManagerDBContext(DbContextOptions<MedicalManagerDBContext> options)
             : base(options)
@@ -18,7 +18,7 @@ namespace MedicalManager.Data
         }
 
 
-        public virtual DbSet<User> Users { get; set; }
+        //public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Medication> Medications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

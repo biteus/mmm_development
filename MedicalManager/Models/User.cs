@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MedicalManager.Models
 {
-    public class User: MedicalManagerUser
+    public class User: Areas.Identity.Data.MedicalManagerUser
     {
         public User()
         {

@@ -1,3 +1,4 @@
+using MedicalManager.Areas.Identity.Data;
 using MedicalManager.Data;
 using MedicalManager.Models;
 using Microsoft.AspNetCore.Builder;
@@ -29,14 +30,29 @@ namespace MedicalManager
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>();
             services.AddMvc().AddXmlSerializerFormatters();
 
             services.AddDbContext<MedicalManagerDBContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("MedicalManagerDBContextConnection")));
 
-            //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<MedicalManagerDBContext>();
+            //services.AddDefaultIdentity<User>().AddRoles<IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>();
 
+            services.AddIdentity<User, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            }).AddEntityFrameworkStores<MedicalManagerDBContext>();
+
+            //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<MedicalManagerDBContext>();
+            //services.AddIdentity<User,  IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>();
+
+
+
+
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>();
+            //services.AddDbContext<MedicalManagerDBContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("MedicalManagerDBContextConnection")));
+            //services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>().AddDefaultTokenProviders();
+            //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<MedicalManagerDBContext>();
             //services.AddIdentity<User, IdentityRole>(config =>
             //{
             //    config.SignIn.RequireConfirmedEmail = true;
@@ -45,10 +61,7 @@ namespace MedicalManager
             //    .AddDefaultTokenProviders();
 
             //services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>();
-
-
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>().AddDefaultTokenProviders();
-
+            //services.AddIdentity<MedicalManagerUser, IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>().AddDefaultTokenProviders();
             //services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
             //    .AddEntityFrameworkStores<MedicalManagerDBContext>();
         }
