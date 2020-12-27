@@ -39,8 +39,9 @@ namespace MedicalManager
 
             services.AddIdentity<User, IdentityRole>(config =>
             {
-                config.SignIn.RequireConfirmedEmail = true;
-            }).AddEntityFrameworkStores<MedicalManagerDBContext>();
+                //config.SignIn.RequireConfirmedEmail = true;
+                config.SignIn.RequireConfirmedEmail = false;
+            }).AddEntityFrameworkStores<MedicalManagerDBContext>().AddDefaultUI().AddDefaultTokenProviders();
 
             //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<MedicalManagerDBContext>();
             //services.AddIdentity<User,  IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>();
@@ -77,15 +78,33 @@ namespace MedicalManager
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
+
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home";
+                    await next();
+                }
+            });
             app.UseHttpsRedirection();
+            //app.UseStaticFiles();
+
+            //app.UseRouting();
+
+
+            //app.UseDefaultFiles();
+            //app.UseStaticFiles();
+
+            //app.UseRouting();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
+
             app.UseStaticFiles();
-
             app.UseRouting();
-
-
-            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
