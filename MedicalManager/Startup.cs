@@ -43,6 +43,37 @@ namespace MedicalManager
                 config.SignIn.RequireConfirmedEmail = false;
             }).AddEntityFrameworkStores<MedicalManagerDBContext>().AddDefaultUI().AddDefaultTokenProviders();
 
+        //    services.AddMvc()
+        //.AddRazorPagesOptions(options =>
+        //{
+        //    //options.AllowAreas = true;
+        //    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+        //    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+        //});
+
+        //    services.ConfigureApplicationCookie(options =>
+        //    {
+        //        options.LoginPath = $"/Identity/Account/Login";
+        //        options.LogoutPath = $"/Identity/Account/Logout";
+        //        options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+        //    });
+
+            // using Microsoft.AspNetCore.Identity.UI.Services;
+            //services.AddSingleton<IEmailSender, EmailSender>();
+
+
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    // Cookie settings
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+            //    options.LoginPath = "/Identity/Account/Login";
+            //    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            //    options.SlidingExpiration = true;
+            //});
+
+
             //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<MedicalManagerDBContext>();
             //services.AddIdentity<User,  IdentityRole>().AddEntityFrameworkStores<MedicalManagerDBContext>();
 
