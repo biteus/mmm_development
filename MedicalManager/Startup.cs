@@ -1,6 +1,7 @@
 using MedicalManager.Areas.Identity.Data;
 using MedicalManager.Data;
 using MedicalManager.Models;
+using MedicalManager.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,20 +44,26 @@ namespace MedicalManager
                 config.SignIn.RequireConfirmedEmail = false;
             }).AddEntityFrameworkStores<MedicalManagerDBContext>().AddDefaultUI().AddDefaultTokenProviders();
 
-        //    services.AddMvc()
-        //.AddRazorPagesOptions(options =>
-        //{
-        //    //options.AllowAreas = true;
-        //    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-        //    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
-        //});
+            services.AddScoped<IMedication, Models.Repositories.MedicationRepository>();
 
-        //    services.ConfigureApplicationCookie(options =>
-        //    {
-        //        options.LoginPath = $"/Identity/Account/Login";
-        //        options.LogoutPath = $"/Identity/Account/Logout";
-        //        options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-        //    });
+
+
+
+
+            //    services.AddMvc()
+            //.AddRazorPagesOptions(options =>
+            //{
+            //    //options.AllowAreas = true;
+            //    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+            //    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            //});
+
+            //    services.ConfigureApplicationCookie(options =>
+            //    {
+            //        options.LoginPath = $"/Identity/Account/Login";
+            //        options.LogoutPath = $"/Identity/Account/Logout";
+            //        options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            //    });
 
             // using Microsoft.AspNetCore.Identity.UI.Services;
             //services.AddSingleton<IEmailSender, EmailSender>();
@@ -121,7 +128,15 @@ namespace MedicalManager
                     await next();
                 }
             });
+
+
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            //app.UseHttpsRedirection();
             //app.UseStaticFiles();
 
             //app.UseRouting();
@@ -134,9 +149,9 @@ namespace MedicalManager
             //app.UseAuthentication();
             //app.UseAuthorization();
 
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
+            //app.UseStaticFiles();
+            //app.UseRouting();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

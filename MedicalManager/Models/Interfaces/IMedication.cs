@@ -7,11 +7,11 @@ namespace MedicalManager.Models.Interfaces
 {
     public interface IMedication
     {
-        Medication GetMedication(int Id, int UserId);
-        IEnumerable<Medication> GetAllMedication(int UserId);
-        Medication AddMedication(Medication medication, int UserId);
-        Medication UpdateMedication(Medication medication, int UserId);
-        Medication DeleteMedication(int id, int UserId);
-        Medication EditMedication(Medication medication, int UserId);
+        Medication GetMedication(int Id, string UserId);
+        IEnumerable<Medication> GetAllMedication(string UserId);
+        Medication AddMedication(Medication medication, string UserId);
+        Medication UpdateMedication(Medication medication, string UserId);
+        Medication DeleteMedication(int id, string UserId);
+        Medication EditMedication(Medication medication, string UserId);
     }
 }
